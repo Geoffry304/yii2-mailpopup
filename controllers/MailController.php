@@ -1,6 +1,6 @@
 <?php
 
-namespace app\timedesk\controllers;
+namespace geoffry304\mailpopup\controllers;
 
 use Yii;
 use yii\web\Controller;
