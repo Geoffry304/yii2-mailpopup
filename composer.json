@@ -1,0 +1,37 @@
+{
+    "name": "geoffry304/yii2-mailpopup",
+    "description": "Yii2 Mailpopup together with email templates",
+    "keywords": [
+        "yii2",
+        "extension",
+        "popup",
+        "email",
+        "email templates",
+        "templates"
+    ],
+    "homepage": "https://github.com/geoffry304/yii2-mailpopup",
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors":[
+        {
+            "name": "Geoffry Van den Eede",
+            "email": "g.vandeneede@dvit.be",
+            "homepage": "http://dvit.be"
+        },
+        {
+            "name": "Tim Van de Velde",
+            "email": "tim@dvit.be",
+            "homepage": "http://dvit.be"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "yiimaker/yii2-email-templates": "~4.0"
+        
+    },
+    "autoload": {
+        "psr-4": {
+            "geoffry304\\mailpopup\\": ""
+        }
+    }
+}
