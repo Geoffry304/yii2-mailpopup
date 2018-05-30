@@ -1,6 +1,6 @@
 <?php
 
-namespace app\timedesk\models;
+namespace geoffry304\mailpopup\models;
 
 use yii\base\Exception;
 use yii\base\Model;
