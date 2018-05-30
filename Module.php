@@ -1,6 +1,6 @@
 <?php
 
-namespace app\timedesk;
+namespace geoffry304\mailpopup;
 
 /**
  * Description of Module
