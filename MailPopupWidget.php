@@ -1,6 +1,6 @@
 <?php
 
-namespace app\timedesk;
+namespace geoffry304\mailpopup;
 
 /**
  * Description of MailPopupWidget
@@ -54,7 +54,7 @@ class MailPopupWidget extends yii\base\Widget {
     
     public function getOutput(){
         $output = \yii\helpers\Html::a($this->options['text'], 
-                  \yii\helpers\Url::to(["#",
+                  \yii\helpers\Url::to(["/mail/default/create",
                   'to' => $this->to,
                   'from' => $this->from,
                   'bcc' => $this->bcc,

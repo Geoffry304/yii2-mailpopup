@@ -1,6 +1,6 @@
 <?php
 
-namespace app\timedesk\models;
+namespace geoffry304\mailpopup\models;
 
 use yii\base\Exception;
 use yii\base\Model;
@@ -126,20 +126,6 @@ class Mail extends Model {
                 ->send();
 
         if ($mail) {
-//            if ($this->newattachments) {
-//                foreach ($this->newattachments as $attachment) {
-//                    if (file_exists($attachment)) {
-//                        unlink($attachment);
-//                    }
-//                }
-//            }
-//            if (strpos($this->template,"PRODUCTORDER") !== false && $this->savedattachments) {
-//                foreach ($this->savedattachments['attachments'] as $attachment) {
-//                    if (file_exists($attachment)) {
-//                        unlink($attachment);
-//                    }
-//                }
-//            }
             ($this->class) ? $this->doExtra() : '';
             return true;
         } else {
@@ -150,23 +136,16 @@ class Mail extends Model {
     public function doExtra() {
         $class = new $this->class;
 
-        if ($class instanceof \app\modules\ticketing\models\Ticket) {
-            $model = \app\modules\ticketing\models\Ticket::findOne($this->idmodel);
-            if ($this->classextra == "sendpdf") {
-                $model->onsite->ServiceReportSent = 1;
-                $model->onsite->save();
-            } else {
-                $model->ConfEmailSent = 1;
-            }
-            $model->save();
-        } else if ($class instanceof \app\modules\productregister\models\Productorder) {
-            $orders = explode(',', $this->idmodel);
-            foreach ($orders as $order) {
-                $model = \app\modules\productregister\models\Productorder::findOne($order);
-                $model->ReminderCount++;
-                $model->save();
-            }
-        }
+//        if ($class instanceof \app\modules\ticketing\models\Ticket) {
+//            $model = \app\modules\ticketing\models\Ticket::findOne($this->idmodel);
+//            if ($this->classextra == "sendpdf") {
+//                $model->onsite->ServiceReportSent = 1;
+//                $model->onsite->save();
+//            } else {
+//                $model->ConfEmailSent = 1;
+//            }
+//            $model->save();
+//        } 
     }
 
     public function setCorrectTemplate() {

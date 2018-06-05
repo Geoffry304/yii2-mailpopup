@@ -2,26 +2,26 @@
 
 namespace geoffry304\mailpopup\controllers;
 
+/**
+ * Description of DefaultController
+ *
+ * @author G.Vandeneede
+ */
 use Yii;
 use yii\web\Controller;
-use app\models\Mail;
 use \yii\web\Response;
 use yii\helpers\Html;
 use app\models\Usertype;
-
-class MailController extends Controller {
-
+use geoffry304\mailpopup\models\Mail;
+class DefaultController extends Controller {
+   
+    
     public function actionCreate() {
         $request = Yii::$app->request;
         $model = new Mail();
 
         
         if ($request->isAjax) {
-//            foreach (Yii::$app->params['fromMail'] as $key => $mail){
-//                $model->from = $mail. "<$key>";
-//                $model->cc = $key;
-//            }
-            //            $model->from = "dispatch@dvit.be";
             $model->from = ($request->get('from')) ? $request->get('from') : "dispatch@dvit.be";
              if ($request->get('bcc')){
                    $model->bcc = $request->get('bcc');
@@ -29,7 +29,7 @@ class MailController extends Controller {
                  $model->cc = $model->from; 
              }
              
-             $companyid = ($request->get('companyid')) ? $request->get('companyid'): null;
+             //$companyid = ($request->get('companyid')) ? $request->get('companyid'): null;
 //            $model->cc = $model->from;
             $model->to = $request->get('to');
             $model->subject = $request->get('subj');
@@ -44,31 +44,31 @@ class MailController extends Controller {
             if ($model->template) {
                 $model->setCorrectTemplate();
             }
-//            if ($model->savedattachments) {
-//                $array['initialPreview'] = [];
-//                $array['initialPreviewConfig'] = [];
-//                $array['attachments'] = [];
-//                foreach ($model->savedattachments as $key => $attachtment) {
-//                    $fileinfo = pathinfo($attachtment);
-//                    $arrayinfo = [];
-//                    if ($fileinfo['extension'] == "pdf") {
-//                        $arrayinfo['type'] = "pdf";
-//                    }
-//                    
-//                    $arrayinfo['url'] =  \yii\helpers\Url::to(['/mail/filedelete']);
-//                    $arrayinfo['key'] = $key;
-//                    $url = Yii::getAlias('@web') . "/" . $attachtment;
-//                    array_push($array['attachments'], $attachtment);
-//                    array_push($array['initialPreview'], $url);
-//                    array_push($array['initialPreviewConfig'], $arrayinfo);
-//                }
-//                $model->savedattachments = $array;
-//            }
+            if ($model->savedattachments) {
+                $array['initialPreview'] = [];
+                $array['initialPreviewConfig'] = [];
+                $array['attachments'] = [];
+                foreach ($model->savedattachments as $key => $attachtment) {
+                    $fileinfo = pathinfo($attachtment);
+                    $arrayinfo = [];
+                    if ($fileinfo['extension'] == "pdf") {
+                        $arrayinfo['type'] = "pdf";
+                    }
+                    
+                    $arrayinfo['url'] =  \yii\helpers\Url::to(['/mail/filedelete']);
+                    $arrayinfo['key'] = $key;
+                    $url = Yii::getAlias('@web') . "/" . $attachtment;
+                    array_push($array['attachments'], $attachtment);
+                    array_push($array['initialPreview'], $url);
+                    array_push($array['initialPreviewConfig'], $arrayinfo);
+                }
+                $model->savedattachments = $array;
+            }
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($request->isGet) {
                 return [
                     'title' => Yii::t('app', 'Stel mail op'),
-                    'content' => $this->renderAjax('create', ['model' => $model, 'companyid' => $companyid]),
+                    'content' => $this->renderAjax('create', ['model' => $model]),
                     'footer' => Html::button(Yii::t('app', 'Sluiten'), ['class' => 'btn btn-default pull-left', 'data-dismiss' => "modal"]) .
                     Html::button(Yii::t('app', 'Verstuur'), ['class' => 'btn btn-primary', 'type' => "submit"])
                 ];
@@ -134,6 +134,4 @@ class MailController extends Controller {
     }
     return $out;
 }
-    
-
 }
