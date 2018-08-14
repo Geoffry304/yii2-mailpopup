@@ -15,10 +15,11 @@ use app\models\Usertype;
 use geoffry304\mailpopup\models\Mail;
 class DefaultController extends Controller {
    
+    public $module;
     
     public function actionCreate() {
         $request = Yii::$app->request;
-        $model = new Mail();
+        $model = $this->module->model("Mail");
 
         
         if ($request->isAjax) {
@@ -41,6 +42,10 @@ class DefaultController extends Controller {
             $model->template = $request->get('template');
             $model->params = $request->get('params');
             $model->savedattachments = $request->get('attachments');
+            $forcereload = "";
+            if ($request->get('forceReload')) {
+                $forcereload = $request->get('forceReload');
+            }
             if ($model->template) {
                 $model->setCorrectTemplate();
             }
@@ -77,7 +82,7 @@ class DefaultController extends Controller {
                  $model->addNewAttachments();
                  $model->sendMail();
                 return [
-                    'forceReload' => '#buttons-div',
+                    'forceReload' => ($forcereload) ? "#".$forcereload : "",
                     'forceClose' => true,
                     'title' => 'Compose mail',
                     'content' => '<span class="text-success">Create appointment success</span>',

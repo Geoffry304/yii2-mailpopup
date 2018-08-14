@@ -169,11 +169,4 @@ class Mail extends Model {
         }
         $this->newattachments = $array;
     }
-
-    public static function getEmails($companyid = null) {
-        $andwhere = ($companyid) ? ['CompanyId' => $companyid] : "";
-        $companyuser = Companyuser::find()->asArray()->where('UserTypeId !=' . Usertype::getUserTypeId(Usertype::TYPE_INACTIVE))->andWhere($andwhere)->all();
-        return \yii\helpers\ArrayHelper::map($companyuser, 'Email', 'Email');
-    }
-
 }

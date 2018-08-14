@@ -16,5 +16,22 @@ use Yii;
 class Module extends yii\base\Module {
 
     public $controllerNamespace = "geoffry304\mailpopup\controllers";
+    
+    public $mailClass = "geoffry304\mailpopup\models\Mail";
+    
+     /**
+     * Get object instance of model
+     * @param string $name
+     * @param array  $config
+     * @return ActiveRecord
+     */
+    public function model($name, $config = [])
+    {
+        if ($name == "Mail"){
+               $config["class"] = $this->mailClass;
+        return Yii::createObject($config);
+        }
+     
+    }
 
 }

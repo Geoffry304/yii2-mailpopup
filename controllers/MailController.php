@@ -10,10 +10,16 @@ use yii\helpers\Html;
 use app\models\Usertype;
 
 class MailController extends Controller {
+    
+    /**
+     * @var \geoffry304\mailpopup\Module
+     * @inheritdoc
+     */
+    public $module;
 
     public function actionCreate() {
         $request = Yii::$app->request;
-        $model = new Mail();
+        $model = $this->module->model("Mail");
 
         
         if ($request->isAjax) {
@@ -77,7 +83,7 @@ class MailController extends Controller {
                  $model->addNewAttachments();
                  $model->sendMail();
                 return [
-                    'forceReload' => '#buttons-div',
+//                    'forceReload' => '#buttons-div',
                     'forceClose' => true,
                     'title' => 'Compose mail',
                     'content' => '<span class="text-success">Create appointment success</span>',

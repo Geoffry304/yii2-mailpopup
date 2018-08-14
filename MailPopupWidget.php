@@ -24,6 +24,10 @@ class MailPopupWidget extends yii\base\Widget {
     public $bcc;
     public $params;
     public $options;
+    public $idmodel;
+    public $class;
+    public $forceReload;
+    
     public function init(){
         if (!isset($this->template) && (!isset($this->body) && !isset($this->subject))){
             throw new InvalidConfigException("You must set template or body & subject parameter");
@@ -63,6 +67,9 @@ class MailPopupWidget extends yii\base\Widget {
                   'template' => $this->template,
                   'params' => $this->params,
                   'languagecode' => $this->languagecode,
+                  'class' => $this->class,
+                  'idmodel' => $this->idmodel,
+                  'forceReload' => $this->forceReload
                   
             ]),
             ['role' => 'modal-remote', 'title' => 'Send mail', 'class' => $this->options['class'],'id' => $this->options['id'], 'data-language' => $this->languagecode]
