@@ -25,7 +25,7 @@ class MailPopupWidget extends yii\base\Widget {
     public $params;
     public $options;
     public $idmodel;
-    public $class;
+    public $classModel;
     public $forceReload;
     
     public function init(){
@@ -67,7 +67,7 @@ class MailPopupWidget extends yii\base\Widget {
                   'template' => $this->template,
                   'params' => $this->params,
                   'languagecode' => $this->languagecode,
-                  'class' => $this->class,
+                  'class' => $this->classModel,
                   'idmodel' => $this->idmodel,
                   'forceReload' => $this->forceReload
                   
